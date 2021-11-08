@@ -18,7 +18,7 @@ const LEARNING_RATE = 0.1;
 
 function setup() {
   createCanvas(WIDTH, HEIGHT);
-  frameRate(2);
+  frameRate(6);
 
   perceptron = new Neuron(LAYERS, LEARNING_RATE);
 
