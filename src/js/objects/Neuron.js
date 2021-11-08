@@ -59,7 +59,9 @@ class Neuron {
       this.exitBias
     );
 
-    return this.exitOutput.map((value) => Math.round(value));
+    this.exitOutput = this.exitOutput.map((value) => Math.round(value));
+
+    return this.exitOutput;
   }
 
   /**
