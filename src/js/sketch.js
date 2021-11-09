@@ -4,9 +4,8 @@ let typeTwo;
 let typeThree;
 const points = [];
 
-const type1 = { x: -170, y: 170 };
-const type2 = { x: 170, y: 170 };
-const type3 = { x: -170, y: -170 };
+const type1 = { x: 170, y: 170 };
+const type2 = { x: -170, y: -170 };
 
 const LAYERS = {
   entry: 2,
@@ -21,6 +20,15 @@ function setup() {
   frameRate(6);
 
   perceptron = new Neuron(LAYERS, LEARNING_RATE);
+}
+
+function draw() {
+  background(250);
+  drawAxis();
+  drawCircles();
+
+  translate(xCenter, yCenter);
+  scale(1, -1);
 
   Array.from(new Array(50)).forEach(() => {
     points.push(
@@ -35,22 +43,7 @@ function setup() {
         getRandom(type2.y + RANGE, type2.y - RANGE)
       )
     );
-    points.push(
-      new Point(
-        getRandom(type3.x + RANGE, type3.x - RANGE),
-        getRandom(type3.y + RANGE, type3.y - RANGE)
-      )
-    );
   });
-}
-
-function draw() {
-  background(250);
-  drawAxis();
-  drawCircles();
-
-  translate(xCenter, yCenter);
-  scale(1, -1);
 
   points.forEach((point) => {
     const values = categorize([0, 0, 0], point);
@@ -68,8 +61,6 @@ function categorize(values = [], point) {
     vals[0] = 1;
   } else if (isInRange(point, type2)) {
     vals[1] = 1;
-  } else if (isInRange(point, type3)) {
-    vals[2] = 1;
   }
 
   return vals;
@@ -83,12 +74,10 @@ function drawCircles() {
   translate(xCenter, yCenter);
   scale(1, -1);
   fill(0, 0, 0, 0);
-  stroke(0, 0, 255);
+  stroke(255, 0, 0);
   ellipse(type1.x, type1.y, RANGE * 2);
   stroke(0, 255, 0);
   ellipse(type2.x, type2.y, RANGE * 2);
-  stroke(255, 0, 0);
-  ellipse(type3.x, type3.y, RANGE * 2);
   pop();
 }
 
